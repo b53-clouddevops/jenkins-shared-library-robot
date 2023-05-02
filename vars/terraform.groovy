@@ -7,7 +7,9 @@ def call() {
         ])
         
         node {
-        ansiColor('xterm') { 
+        ansiColor('xterm') {
+            sh "rm -rf *"
+            git branch: 'main', url: 'https://github.com/b53-clouddevops/terraform-vpc.git'
 
             stage('Terraform Init') {
                 sh ''' 

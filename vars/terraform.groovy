@@ -10,6 +10,7 @@ def call() {
 
             stage('Terraform Init') {
                 sh ''' 
+                    ls -ltr
                     terrafile -f env-${ENV}/Terrafile
                     terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                 '''

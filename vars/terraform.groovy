@@ -8,6 +8,7 @@ def call() {
             parameters([
                 choice(choices: 'dev\nprod', description: "Chose the environment", name: "ENV"),
                 choice(choices: 'apply\ndestroy', description: "Chose the Action", name: "ACTION"),
+                string(choices: 'APP_VERSION', description: "Enter the Backend Version To Ve Deployed - Ignore this if it is a backend component", name: "APP_VERSION"),
             ]),
         ])
         

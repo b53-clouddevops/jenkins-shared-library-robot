@@ -38,7 +38,7 @@ def call() {
                    sh '''
                     cd ${TFDIR}
                     export TF_VAR_APP_VERSION=${APP_VERSION}
-                    terraform ${ACTION} -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                    terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                 '''
                 }
             }

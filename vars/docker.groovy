@@ -6,20 +6,20 @@ def call() {
         common.lintChecks()
 
         stage('Preparing the artifact') {
-            if(env.APP_TYPE == "nodejs") {
+            if(env.COMPONENT == "nodejs") {
                 sh ''' 
                     npm install
                     zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
                 '''      
             }
-            else if(env.APP_TYPE == "maven") {  
+            else if(env.COMPONENT == "maven") {  
                 sh '''
                     mvn clean package
                     mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
                     zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
                 '''
             }
-            else if(env.APP_TYPE == "python") {  
+            else if(env.COMPONENT == "python") {  
                 sh '''
                     zip -r ${COMPONENT}-${TAG_NAME}.zip *.py *.ini requirements.txt
                 '''

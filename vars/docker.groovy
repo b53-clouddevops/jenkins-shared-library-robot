@@ -2,21 +2,23 @@ def call() {
     node {
         sh "rm -rf *"
         git branch: 'main', url: "https://github.com/b53-clouddevops/${COMPONENT}.git"
-
         common.lintChecks()
 
+    if ( env.TAG_NAME != null ) {
         stage('Preparing the artifact') {
             if(env.APP == "nodejs") {
                 sh ''' 
                     npm install
-                    zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                    ls -ltr
+                    # zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
                 '''      
             }
             else if(env.APP == "maven") {  
                 sh '''
                     mvn clean package
                     mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
-                    zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                    ls -ltr 
+                    # zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
                 '''
             }
             else if(env.APP == "python") {  
@@ -39,6 +41,7 @@ def call() {
                 }
             }
         }
+    }
 
         // env.APP_TYPE = "maven" 
         // common.lintChecks()

@@ -16,7 +16,7 @@ def call() {
             else if(env.APP == "maven") {  
                 sh '''
                     mvn clean package
-                    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
+                    cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
                     ls -ltr 
                     # zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
                 '''
